@@ -1,6 +1,6 @@
-![Apollo Logo](assets/logo.png)
-
 # Apollo Repair Framework
+
+![Apollo Logo](assets/logo.png)
 
 ## Overview 
 
