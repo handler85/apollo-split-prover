@@ -1,8 +1,4 @@
-<p align="center">
-    <br>
-    <img src="./assets/apollo_logo.png" width="200"/>
-    <br>
-<p>
+![Apollo Logo](assets/logo.png)
 
 # Apollo Repair Framework
 [Paper: APOLLO: Automated LLM and Lean Collaboration for Advanced Formal Reasoning](https://arxiv.org/abs/2505.05758)
