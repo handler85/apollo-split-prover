@@ -145,10 +145,20 @@ theorem mathd_algebra_141 (a b : ℝ) (h₁ : a * b = 180) (h₂ : 2 * (a + b) =
 We save the repaired theorem as a Lean file. Refer to config file to change the base LLM.
 
 ## Evaluation Datasets
-We provide the evaluation datasets as JSONL files in the datasets directory. Each entry includes an "informal_statement" for the natural-language problem description and a "formal_statement" for the corresponding Lean4 formulation.
+We provide the evaluation datasets as JSONL files in the datasets directory. Each entry includes an `informal_statement` for the natural-language problem description and a `formal_statement` for the corresponding Lean4 formulation.
 
 ## Troubleshooting REPL
-On rare occasions, the built REPL may stop compiling proofs, for example, after GPU cluster changes or a system reboot. Usually, rebuilding the REPL resolves the issue; however, if it does not, follow these steps:
+On rare occasions, the built REPL may stop compiling proofs, for example, after GPU cluster changes or a system reboot. To test whether REPL works, we supply `test_repl.py` script. 
+
+If REPL is set up correctly, you should see following message:
+```python
+{'sorries': [{'proofState': 0, 'pos': {'line': 16, 'column': 2}, 'goal': 'x y z w : ℕ\nht : 1 < x ∧ 1 < y ∧ 1 < z\nhw : 0 < w\nh0 : logb ↑x ↑w = 24\nh1 : logb ↑y ↑w = 40\nh2 : logb (↑x * ↑y * ↑z) ↑w = 12\n⊢ logb ↑z ↑w = 60', 'endPos': {'line': 16, 'column': 7}}], 'tactics': [],
+ 'errors': [], 'warnings': [{'severity': 'warning', 'pos': {'line': 8, 'column': 8}, 'endPos': {'line': 8, 'column': 24}, 'data': "declaration uses 'sorry'"}],
+'infos': [], 'system_messages': '', 'system_errors': None, 'ast': {},
+'verified_code': 'import Mathlib\nimport Aesop\n\nset_option maxHeartbeats 0\n\nopen BigOperators Real Nat Topology Rat\n\ntheorem aime_1983_p1_alt\n  (x y z w : ℕ)\n  (ht : 1 < x ∧ 1 < y ∧ 1 < z)\n  (hw : 0 < w)\n  (h0 : Real.logb x w = 24)\n  (h1 : Real.logb y w = 40)\n  (h2 : Real.logb (x * y * z) w = 12) :\n  Real.logb z w = 60 := by\n  sorry\n',
+'pass': True, 'complete': False, 'verify_time': 11.440606832504272}
+```
+REPL should output `True` in the `pass` cell. If `pass` is False or is missing from the output, it means that REPL is not running. Usually, rebuilding the REPL resolves the issue; however, if it does not, follow these steps:
 
 ```sh
 cd repl
