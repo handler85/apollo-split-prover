@@ -1,11 +1,26 @@
 ![Apollo Logo](assets/logo.png)
 
 # Apollo Repair Framework
-[Paper: APOLLO: Automated LLM and Lean Collaboration for Advanced Formal Reasoning](https://arxiv.org/abs/2505.05758)
 
 ## Overview 
-The codebase provides an implementation of Apollo framework that takes an agentic approach to Lean4 code repair process. This implementation supports whole-proof generation models and Lean compiler of choice is Lean REPL.
+
+The codebase implements the Apollo framework, which uses an agentic approach to repair Lean4 code. It supports whole-proof generation models and integrates with Lean compiler via Lean REPL. For a full description of the framework and detailed algorithms, see our paper [“APOLLO: Automated LLM and Lean Collaboration for Advanced Formal Reasoning”](https://arxiv.org/abs/2505.05758) on arXiv.
+
+
 ![Apollo Pipeline](assets/pipeline.png)
+
+## Evaluation Results
+According to our evaluation results, Apollo improves the accuracy of modern theorem provers while sampling less proofs from the LLMs.
+| Method                                    | Model Size | Sample Budget | miniF2F-test      |
+|-------------------------------------------|------------|---------------|-------------------|
+| o3-mini                                   |      -     |       32      |       24.6%       |
+| o4-mini                                   |      -     |       1       |        7.0%       |
+| Goedel-Prover-SFT                         |     7B     |     25600     |       64.7%       |
+| Kimina-Prover-Preview-Distill-7B          |     7B     |      1024     |       70.8%       |
+| o3-mini + Apollo                          |      -     |       8       |   40.2% (+36.9%)  |
+| o4-mini + Apollo                          |      -     |       15      |   46.7% (39.7%)   |
+| Goedel-Prover-SFT + Apollo                |     7B     |      362      |   65.6% (+0.9%)   |
+| Kimina-Prover-Preview-Distill-7B + Apollo |     7B     |    **307**    | **75.0% (+4.2%)** |
 
 ## Requirements
 - Supported platform: Linux
@@ -71,12 +86,12 @@ theorem mathd_algebra_141 (a b : ℝ) (h₁ : a * b = 180) (h₂ : 2 * (a + b) =
 '''
 
 
-# Rec Depth
-max_attempts = 2
-config = 'configs/baseline_sampling_kimina_prover.py'
-problem_dir = 'logs/test'
+# Parameters
+max_attempts = 2 # maximum recursion depth
+config = 'configs/baseline_sampling_kimina_prover.py' # config file for LLM
+problem_dir = 'logs/test' # where to save final lean file and intermediate proof states
 
-# Instantiate the apollo repair object
+# Instantiate the Apollo repair object
 manager = ApolloRepair(
     code=code,
     lemma_name='test',
@@ -131,6 +146,17 @@ We save the repaired theorem as a Lean file. Refer to config file to change the 
 
 ## Evaluation Datasets
 We provide the evaluation datasets as JSONL files in the datasets directory. Each entry includes an "informal_statement" for the natural-language problem description and a "formal_statement" for the corresponding Lean4 formulation.
+
+## Troubleshooting REPL
+On rare occasions, the built REPL may stop compiling proofs, for example, after GPU cluster changes or a system reboot. Usually, rebuilding the REPL resolves the issue; however, if it does not, follow these steps:
+
+```sh
+cd repl
+lake clean
+lake update
+lake build
+```
+Cleaning and updating the Lean REPL typically fixes all problems. This repository is configured for Lean 4.17.0. To update the REPL version, please refer to the [Lean REPL repository](https://github.com/leanprover-community/repl).
 
 ## Bibtex Citation
 ```bibtex
