@@ -1,8 +1,15 @@
+<p align="center">
+    <br>
+    <img src="./assets/apollo_logo.png" width="200"/>
+    <br>
+<p>
+
 # Apollo Repair Framework
 [Paper: APOLLO: Automated LLM and Lean Collaboration for Advanced Formal Reasoning](https://arxiv.org/abs/2505.05758)
 
 ## Overview 
 The codebase provides an implementation of Apollo framework that takes an agentic approach to Lean4 code repair process. This implementation supports whole-proof generation models and Lean compiler of choice is Lean REPL.
+![Apollo Pipeline](assets/pipeline.png)
 
 ## Requirements
 - Supported platform: Linux
@@ -73,7 +80,7 @@ max_attempts = 2
 config = 'configs/baseline_sampling_kimina_prover.py'
 problem_dir = 'logs/test'
 
-# Instantiate the single-lemma manager
+# Instantiate the apollo repair object
 manager = ApolloRepair(
     code=code,
     lemma_name='test',
