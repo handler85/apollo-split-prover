@@ -50,6 +50,8 @@ pip install -r requirements.txt
 
 ```sh
 cd repl
+lake clean
+lake update
 lake build
 ```
 
