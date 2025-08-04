@@ -11,16 +11,18 @@ The codebase implements the Apollo framework, which uses an agentic approach to 
 
 ## Evaluation Results
 According to our evaluation results, Apollo improves the accuracy of modern theorem provers while sampling less proofs from the LLMs.
-| Method                                    | Model Size | Sample Budget | miniF2F-test      |
-|-------------------------------------------|------------|---------------|-------------------|
-| o3-mini                                   |      -     |       32      |       24.6%       |
-| o4-mini                                   |      -     |       1       |        7.0%       |
-| Goedel-Prover-SFT                         |     7B     |     25600     |       64.7%       |
-| Kimina-Prover-Preview-Distill-7B          |     7B     |      1024     |       70.8%       |
-| o3-mini + Apollo                          |      -     |       8       |   40.2% (+36.9%)  |
-| o4-mini + Apollo                          |      -     |       15      |   46.7% (39.7%)   |
-| Goedel-Prover-SFT + Apollo                |     7B     |      362      |   65.6% (+0.9%)   |
-| Kimina-Prover-Preview-Distill-7B + Apollo |     7B     |    **307**    | **75.0% (+4.2%)** |
+| Method                                    | Model Size | Sample Budget | Token Count | miniF2F-test   |
+|-------------------------------------------|------------|---------------|-------------|----------------|
+| o3-mini                                   | -          | 32            | -           | 24.6%          |
+| o4-mini                                   | -          | 1             | -           | 7.0%           |
+| Goedel-Prover-SFT                         | 7B         | 25600         | 12.7M       | 64.7%          |
+| Kimina-Prover-Preview-Distill-7B          | 7B         | 1024          | 4.5M        | 70.8%          |
+| Goedel-V2-8B                              | 8B         | 32            | 168K        | 83.3%          |
+| o3-mini + Apollo                          | -          | 8             | -           | 40.2% (+36.9%) |
+| o4-mini + Apollo                          | -          | 15            | -           | 46.7% (39.7%)  |
+| Goedel-SFT + Apollo                       | 7B         | 362           | 179K        | 65.6% (+0.9%)  |
+| Kimina-Prover-Preview-Distill-7B + Apollo | 7B         | 307           | 1.3M        | 75.0% (+4.2%)  |
+| Goedel-V2-8B + Apollo                     | 8B         | **63**            | **403K**        | **84.9% (+1.6%)**  |
 
 ## Requirements
 - Supported platform: Linux
