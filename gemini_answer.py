@@ -38,7 +38,7 @@ First, provide a step-by-step natural language solution to the problem, breaking
 
 Then, based on your NL solution, write a Lean 4 proof outline for the formal statement above. 
 - The Lean proof should have the same structure as your NL solution, with each lemma and step reflected as a corresponding Lean lemma or proof step.
-- For any step you cannot fully prove, use 'sorry' as a placeholder.
+- For all steps, use 'sorry' as a placeholder - your job is to only provide the proof structure.
 - Use clear Lean 4 syntax and include all necessary lemma statements and structure.
 
 Output only the Lean 4 code block for the proof sketch at the end.

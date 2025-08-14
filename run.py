@@ -9,9 +9,9 @@ set_option maxHeartbeats 0
 
 open BigOperators Real Nat Topology Rat
 '''
-problem_name = "numbertheory_x5neqy2p4"
-nl_statement = "\/-- Show that for any two integers $x$ and $y$, $x^5 \\ne y^2 + 4$.-\/\n"
-formal_statement = "import Mathlib\nimport Aesop\n\nset_option maxHeartbeats 0\n\nopen BigOperators Real Nat Topology Rat\n\n\/-- Show that for any two integers $x$ and $y$, $x^5 \\ne y^2 + 4$.-\/\ntheorem numbertheory_x5neqy2p4 (x y : \u2124) : x ^ 5 \u2260 y ^ 2 + 4 := by\n"
+problem_name = "cool_problem"
+nl_statement = "\/-- Show that 1+1=2. -\/\n"
+formal_statement = "import Mathlib\nimport Aesop\n\nset_option maxHeartbeats 0\n\nopen BigOperators Real Nat Topology Rat\n\n\/-- Show that 1+1=2. -\/\ntheorem cool_problem : 1+1=2 := by\n"
 
 gem_sketch = get_gemini_sorrified_lean_sketch(problem_name, nl_statement, formal_statement)
 code += '\n' + gem_sketch + '\n'
