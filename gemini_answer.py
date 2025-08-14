@@ -19,7 +19,7 @@ def get_gemini_sorrified_lean_sketch(problem_name: str, nl_statement: str, forma
         raise ValueError("Please set the GEMINI_API_KEY environment variable.")
 
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.5-pro-preview-06-05")
+    model = genai.GenerativeModel("gemini-2.5-pro")
     prompt = f"""
 You are a Lean 4 proof assistant. Here is a math problem:
 
