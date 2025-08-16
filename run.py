@@ -1,7 +1,7 @@
 import os
 from apollo import ApolloRepair
 from gemini_answer import get_gemini_sorrified_lean_sketch
-from o3-mini_answer import get_o3mini_sorrified_lean_sketch
+from o3_mini_answer import get_o3mini_sorrified_lean_sketch
 
 #code = '''
 #import Mathlib
