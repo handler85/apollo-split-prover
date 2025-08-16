@@ -1,7 +1,7 @@
 import os
 import google.generativeai as genai
 
-def get_gemini_sorrified_lean_sketch(problem_name: str, nl_statement: str, formal_statement: str) -> str:
+def get_gemini_sorrified_lean_sketch(problem_name: str, formal_statement: str) -> str:
     """
     Prompts Gemini Pro 2.5 to solve a problem and generate a sorrified Lean4 proof outline
     with all necessary lemmas and steps, ensuring the Lean proof structure matches the NL solution.
@@ -28,16 +28,11 @@ Problem Name: {problem_name}
 ```lean
 {formal_statement}
 ```
-Natural Language Statement:
-{nl_statement}
-
-Formal Lean Statement:
-{formal_statement}
 
 First, provide a step-by-step natural language solution to the problem, breaking it down into all necessary lemmas and logical steps.
 
-Then, based on your NL solution, write a Lean 4 proof outline for the formal statement above. 
-- The Lean proof should have the same structure as your NL solution, with each lemma and step reflected as a corresponding Lean lemma or proof step.
+Then, based on your NL solution, write a Lean 4 proof outline for the formal statement above.
+- The Lean proof skeleton should have the same structure as your NL solution, with each lemma and step reflected as a corresponding Lean lemma or proof step.
 - For all steps, use 'sorry' as a placeholder - your job is to only provide the proof structure.
 - Use clear Lean 4 syntax and include all necessary lemma statements and structure.
 
