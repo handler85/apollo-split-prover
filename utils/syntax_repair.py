@@ -160,8 +160,15 @@ class SyntaxCorrector:
                 
             
         self.code = '\n'.join(lines)
-        
-            
+    
+    def remove_double_header(self):
+        lines = self.code.splitlines()
+        if len(lines) >= 8:
+            first4 = lines[:4]
+            next4 = lines[4:8]
+            if first4 == next4:
+                lines = lines[:4] + lines[8:]
+        self.code = '\n'.join(lines)
 
     def correct_text(self) -> str:
         """
@@ -192,6 +199,6 @@ class SyntaxCorrector:
         
         self.code = '\n'.join([l for l in self.code.splitlines() if l.strip() != ''])
         self.normalize_indentation()
-        
+        self.remove_double_header()
         
         return self.code

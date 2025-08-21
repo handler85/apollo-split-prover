@@ -4,18 +4,16 @@ from apollo import ApolloRepair
 from gemini_answer import get_gemini_sorrified_lean_sketch
 from o3_mini_answer import get_o3mini_sorrified_lean_sketch
 
-#code = '''
-#import Mathlib
-#import Aesop
-#
-#set_option maxHeartbeats 0
-#
-#open BigOperators Real Nat Topology Rat
-#'''
+header = '''
+import Mathlib
+import Aesop
+set_option maxHeartbeats 0
+open BigOperators Real Nat Topology Rat
+'''
 
 
 # Parameters
-max_attempts = 3 # maximum recursion depth
+max_attempts = 2 # maximum recursion depth
 config = 'configs/baseline_sampling_ds_v2.py' # config file for LLM
 output_dir = 'final_proofs'
 os.makedirs(output_dir, exist_ok=True)
@@ -30,7 +28,7 @@ for idx, problem in enumerate(problems):
     print(f"Processing {idx+1}/{len(problems)}: {problem_name}")
     try:
         o3_sketch = get_o3mini_sorrified_lean_sketch(problem_name, formal_statement)
-        code = o3_sketch + "\n"
+        code = header + "\n" + o3_sketch + "\n"
         log_dir = os.path.join('logs', problem_name)
         manager = ApolloRepair(
             code=code,
