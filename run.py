@@ -3,6 +3,26 @@ import json
 from apollo import ApolloRepair
 from gemini_answer import get_gemini_sorrified_lean_sketch
 from o3_mini_answer import get_o3mini_sorrified_lean_sketch
+import shutil
+
+def delete_root_logs():
+    logs_dir = os.path.join(os.getcwd(), "logs")
+    if os.path.isdir(logs_dir):
+        print(f"Deleting: {logs_dir}")
+        shutil.rmtree(logs_dir, ignore_errors=True)
+    else:
+        print("No 'logs' directory found in current directory.")
+
+def delete_pycache(root="."):
+    for dirpath, dirnames, filenames in os.walk(root, topdown=False):
+        for dirname in dirnames:
+            if dirname == "__pycache__":
+                full_path = os.path.join(dirpath, dirname)
+                print(f"Deleting: {full_path}")
+                shutil.rmtree(full_path, ignore_errors=True)
+def fix_slashes(s: str) -> str:
+    return s.replace("\\/", "/")
+
 
 header = '''
 import Mathlib
@@ -23,7 +43,8 @@ with open('minif2f_train.jsonl', 'r', encoding='utf-8') as f:
 
 for idx, problem in enumerate(problems):
     problem_name = problem['name']
-    formal_statement = problem['formal_statement']
+    formal_statement = fix_slashes(problem['formal_statement'])
+
     #take out \/?
     print(f"Processing {idx+1}/{len(problems)}: {problem_name}")
     try:
@@ -44,4 +65,5 @@ for idx, problem in enumerate(problems):
         print(f"Saved proof to {output_path}")
     except Exception as e:
         print(f"Error processing {problem_name}: {e}")
-        
+    delete_root_logs()
+    delete_pycache(".")        
