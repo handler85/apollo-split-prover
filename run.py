@@ -23,7 +23,31 @@ def delete_pycache(root="."):
 def fix_slashes(s: str) -> str:
     return s.replace("\\/", "/")
 
-
+def process_minif2f_problem(idx, problem, total_problems, header, config, max_attempts, output_dir):
+    problem_name = problem['name']
+    formal_statement = fix_slashes(problem['formal_statement'])
+    print(f"Processing {idx+1}/{total_problems}: {problem_name}")
+    try:
+        o3_sketch = get_o3mini_sorrified_lean_sketch(problem_name, formal_statement)
+        code = header + "\n" + o3_sketch + "\n"
+        log_dir = os.path.join('logs', problem_name)
+        manager = ApolloRepair(
+            code=code,
+            lemma_name=problem_name,
+            config=config,
+            rec_depth=max_attempts,
+            log_dir=log_dir
+        )
+        final_proof_path = manager.run()
+        output_path = os.path.join(output_dir, f"{problem_name}.lean")
+        with open(final_proof_path, 'r', encoding='utf-8') as src, open(output_path, 'w', encoding='utf-8') as dst:
+            dst.write(src.read())
+        print(f"Saved proof to {output_path}")
+    except Exception as e:
+        print(f"Error processing {problem_name}: {e}")
+    delete_root_logs()
+    delete_pycache(".")
+    
 header = '''
 import Mathlib
 import Aesop
@@ -40,30 +64,5 @@ os.makedirs(output_dir, exist_ok=True)
 
 with open('minif2f_train.jsonl', 'r', encoding='utf-8') as f:
     problems = [json.loads(line) for line in f]
-
 for idx, problem in enumerate(problems):
-    problem_name = problem['name']
-    formal_statement = fix_slashes(problem['formal_statement'])
-
-    #take out \/?
-    print(f"Processing {idx+1}/{len(problems)}: {problem_name}")
-    try:
-        o3_sketch = get_o3mini_sorrified_lean_sketch(problem_name, formal_statement)
-        code = header + "\n" + o3_sketch + "\n"
-        log_dir = os.path.join('logs', problem_name)
-        manager = ApolloRepair(
-            code=code,
-            lemma_name=problem_name,
-            config=config,
-            rec_depth=max_attempts,
-            log_dir = log_dir
-        )
-        final_proof_path = manager.run()
-        output_path = os.path.join(output_dir, f"{problem_name}.lean")
-        with open(final_proof_path, 'r', encoding='utf-8') as src, open(output_path, 'w', encoding='utf-8') as dst:
-            dst.write(src.read())
-        print(f"Saved proof to {output_path}")
-    except Exception as e:
-        print(f"Error processing {problem_name}: {e}")
-    delete_root_logs()
-    delete_pycache(".")        
+    process_minif2f_problem(idx, problem, len(problems), header, config, max_attempts, output_dir)
