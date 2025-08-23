@@ -9,7 +9,7 @@ lean_timeout = 120
 # model
 batch_size = 4
 mode = 'cot_ds_v2' # chat templates can be changed in prover/utils.py
-pass_ = 32
+pass_ = 1
 model_path = 'deepseek-ai/DeepSeek-Prover-V2-7B'
 
 model_args = AttrDict(
