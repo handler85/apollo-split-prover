@@ -47,7 +47,7 @@ def process_minif2f_problem(idx, problem, total_problems, header, config, max_at
     except Exception as e:
         print(f"Error processing {problem_name}: {e}")
 
-    
+
 header = '''
 import Mathlib
 import Aesop
