@@ -4,6 +4,7 @@ from apollo import ApolloRepair
 from gemini_answer import get_gemini_sorrified_lean_sketch
 from o3_mini_answer import get_o3mini_sorrified_lean_sketch
 import shutil
+import sys
 
 def delete_root_logs():
     logs_dir = os.path.join(os.getcwd(), "logs")
@@ -62,7 +63,20 @@ config = 'configs/baseline_sampling_ds_v2.py' # config file for LLM
 output_dir = 'final_proofs'
 os.makedirs(output_dir, exist_ok=True)
 
+
+
+if len(sys.argv) < 2:
+    print("Usage: python run.py <problem_index>")
+    sys.exit(1)
+
+problem_index = int(sys.argv[1])
+
 with open('minif2f_train.jsonl', 'r', encoding='utf-8') as f:
     problems = [json.loads(line) for line in f]
-for idx, problem in enumerate(problems):
-    process_minif2f_problem(idx, problem, len(problems), header, config, max_attempts, output_dir)
+
+if not (0 <= problem_index < len(problems)):
+    print(f"Invalid problem index: {problem_index}")
+    sys.exit(1)
+
+problem = problems[problem_index]
+process_minif2f_problem(problem_index, problem, len(problems), header, config, max_attempts, output_dir)
