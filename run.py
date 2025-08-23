@@ -46,8 +46,7 @@ def process_minif2f_problem(idx, problem, total_problems, header, config, max_at
         print(f"Saved proof to {output_path}")
     except Exception as e:
         print(f"Error processing {problem_name}: {e}")
-    delete_root_logs()
-    delete_pycache(".")
+
     
 header = '''
 import Mathlib
@@ -80,3 +79,4 @@ if not (0 <= problem_index < len(problems)):
 
 problem = problems[problem_index]
 process_minif2f_problem(problem_index, problem, len(problems), header, config, max_attempts, output_dir)
+delete_pycache(".")
