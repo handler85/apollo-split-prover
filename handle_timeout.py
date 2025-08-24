@@ -23,6 +23,8 @@ def delete_pycache(root="."):
                 shutil.rmtree(full_path, ignore_errors=True)
 
 
+with open('minif2f_train.jsonl', 'r', encoding='utf-8') as f:
+    problems = [json.loads(line) for line in f]
 problem_index = int(sys.argv[1])
 problem = problems[problem_index]
 problem_name = problem['name']
