@@ -2,3 +2,15 @@
 amc12a_2003_p5
 mathd_numbertheory_314
 imo_1962_p2
+algebra_others_exirrpowirrrat
+amc12b_2002_p4
+amc12b_2021_p18
+amc12b_2002_p19
+amc12b_2020_p22
+amc12a_2020_p9
+algebra_cubrtrp1oncubrtreq3_rcubp1onrcubeq5778
+amc12_2001_p21
+amc12a_2008_p25
+aime_1990_p15
+aime_1999_p11
+amc12_2000_p20
