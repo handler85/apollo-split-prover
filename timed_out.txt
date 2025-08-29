@@ -14,3 +14,6 @@ amc12a_2008_p25
 aime_1990_p15
 aime_1999_p11
 amc12_2000_p20
+amc12a_2021_p25
+amc12a_2020_p25
+mathd_numbertheory_296

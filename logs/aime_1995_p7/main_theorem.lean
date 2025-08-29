@@ -1,0 +1,13 @@
+import Mathlib
+import Aesop
+set_option maxHeartbeats 0
+open BigOperators Real Nat Topology Rat
+Below is a natural language explanation followed by the corresponding Lean 4 proof skeleton.
+──────────────────────────────
+Natural Language Explanation:
+1. Define S = sin t + cos t and P = sin t · cos t. Then note that
+  (1 + sin t)(1 + cos t) = 1 + sin t + cos t + sin t · cos t = 1 + S + P.
+  Since (1 + sin t)(1 + cos t) = 5/4 by hypothesis, we have 1 + S + P = 5/4, so S + P = 1/4.2. Use the trigonometric identity sin²t + cos²t = 1 to write S² = (sin t + cos t)² = sin²t + 2 sin t cos t + cos²t = 1 + 2P. Thus, P = (S² − 1)/2.3. Substitute this expression for P into S + P = 1/4: S + (S² − 1)/2 = 1/4. Multiply through by 4 to obtain a quadratic in S: 2S² + 4S − 3 = 0.4. Solve the quadratic equation for S. The solutions are S = (−4 ± √(16 + 24))/(4) = (−4 ± √40)/4. Since √40 = 2√10, we have S = (−4 ± 2√10)/4 = −1 ± (√10)/2. Because the sum of sin t and cos t must lie in [−√2, √2], we choose S = −1 + (√10)/2.5. Substitute this S back into P = (S² − 1)/2 to compute P. A straightforward computation shows that P = (5 − 2√10)/4.6. Now write (1 − sin t)(1 − cos t) = 1 − S + P. Replace S and P with the values found to obtain (1 − sin t)(1 − cos t) = 1 − (−1 + (√10)/2) + (5 − 2√10)/4 = 13/4 − √10.7. Given that (1 − sin t)(1 − cos t) is also equal to m/n − √k (with m,n, k positive integers and m,n relatively prime), equate the rational parts and the irrational parts: m/n must equal 13/4 and √k must equal √10. Thus, m = 13, n = 4, and k = 10.8. The desired result is k + m + n = 10 + 13 + 4 = 27.──────────────────────────────Lean 4 Proof Skeleton:Below is the Lean 4 code block that outlines the proof with each logical step matching the explanation above. (All proofs are left as try norm_cast ; try norm_num ; try simp_all ; try ring_nf at * ; try native_decide ; try linarith ; try nlinarith placeholders.) import Mathlibimport Aesopset_option maxHeartbeats 0open BigOperators Real Nat Topology Ratset_option pp.instanceTypes trueset_option pp.numericTypes trueset_option pp.coercions.types trueset_option pp.letVarTypes trueset_option pp.structureInstanceTypes trueset_option pp.instanceTypes trueset_option pp.mvars.withType trueset_option pp.coercions trueset_option pp.funBinderTypes trueset_option pp.piBinderTypes truetheorem aime_1995_p7 (k m n : ℕ) (t : ℝ) (h₀ : 0 < k ∧ 0 < m ∧ 0 < n) (h₁ : Nat.gcd m n = 1) (h₂ : (1 + Real.sin t) * (1 + Real.cos t) = 5 / 4) (h₃ : (1 - Real.sin t) * (1 - Real.cos t) = m / n - Real.sqrt k) : k + m + n = 27 := by
+  sorry
+  try norm_cast ; try norm_num ; try simp_all ; try ring_nf at * ; try native_decide ; try linarith ; try nlinarith
+  sorry
