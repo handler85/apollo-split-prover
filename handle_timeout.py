@@ -36,5 +36,5 @@ if os.path.isdir(problem_dir):
 else:
     print("Directory to be deleted not found in current directory.")
 delete_pycache(".")
-with open("timed_out.txt", "a") as file:
+with open("timed_out_dsv2.txt", "a") as file:
     file.write(f"\n{problem_name}")
