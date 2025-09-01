@@ -1,9 +1,24 @@
 import os
 import json
 from apollo import ApolloRepair
-from dsv2_answer import get_dsv2_initial_answer
 import shutil
 import sys
+import subprocess
+def get_dsv2_initial_answer(problem):
+    python_exec = sys.executable
+    result = subprocess.run(
+        [python_exec, 'dsv2_answer.py'],
+        input=json.dumps(problem),
+        text=True,
+        capture_output=True,
+    )
+    
+    if result.returncode != 0:
+        print("Subprocess failed")
+        print("STDOUT:\n", result.stdout)
+        print("STDERR:\n", result.stderr)
+        raise RuntimeError(f"Subprocess failed with code {result.returncode}")
+    return result.stdout.strip()
 
 def delete_root_logs():
     logs_dir = os.path.join(os.getcwd(), "logs")

@@ -4,6 +4,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import time
 import re
+import sys
 
 
 def get_dsv2_initial_answer(problem) -> str:
@@ -60,5 +61,9 @@ def get_dsv2_initial_answer(problem) -> str:
         lean_code = resp.strip()
 
     return lean_code
-    
+if __name__ == "__main__":
+    problem_json = sys.stdin.read()
+    problem = json.loads(problem_json)
+    answer = get_dsv2_initial_answer(problem)
+    print(answer)    
     
