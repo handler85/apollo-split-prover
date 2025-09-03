@@ -6,7 +6,7 @@ for ((i=0; i<NUM_PROBLEMS; i++)); do
     timeout 20m python3 rundsv2.py $i
     if [ $? -eq 124 ]; then
         echo "Timeout reached for problem $i"
-        python3 handle_timeout.py $i
+        python3 handle_timeout_dsv2.py $i
     fi
     echo "Killing all Python processes..."
     pkill -9 -f python || true
