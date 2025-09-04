@@ -35,6 +35,14 @@ def process_lean_file(file_path: str, lean_cmd: str, exec_path: str, timeout: in
             "generated_proof": ""
         }
 
+    if "theorem" not in proof_content:
+        return {
+            "problem_name": problem_name,
+            "status": "failed",
+            "error_message": "No 'theorem' found in file.",
+            "generated_proof": proof_content
+        }
+
     try:
         process = subprocess.run(
             ['lake', 'env', 'lean', file_path],
