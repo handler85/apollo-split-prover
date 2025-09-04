@@ -1,0 +1,20 @@
+import Mathlib
+import Aesop
+set_option maxHeartbeats 0
+open BigOperators Real Nat Topology Rat
+set_option pp.instanceTypes true
+set_option pp.numericTypes true
+set_option pp.coercions.types true
+set_option pp.letVarTypes true
+set_option pp.structureInstanceTypes true
+set_option pp.instanceTypes true
+set_option pp.mvars.withType true
+set_option pp.coercions true
+set_option pp.funBinderTypes true
+set_option pp.piBinderTypes true
+theorem mathd_numbertheory_12 :
+    Finset.card (Finset.filter (fun x => 20 ∣ x) (Finset.Icc 15 85)) = 4 := by
+  have h_main : Finset.card (Finset.filter (fun x => 20 ∣ x) (Finset.Icc 15 85)) = 4 := by
+    apply Eq.symm
+    rfl
+  exact h_main

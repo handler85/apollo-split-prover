@@ -1,0 +1,17 @@
+
+amc12a_2020_p10
+imo_1997_p5
+mathd_numbertheory_483
+mathd_numbertheory_495
+algebra_abpbcpcageq3_sumaonsqrtapbgeq3onsqrt2
+numbertheory_2pownm1prime_nprime
+mathd_algebra_276
+amc12b_2020_p6
+aime_1984_p1
+amc12a_2021_p8
+algebra_ineq_nto1onlt2m1on
+amc12a_2020_p15
+imo_2019_p1
+aime_1983_p3
+mathd_algebra_289
+amc12a_2009_p6

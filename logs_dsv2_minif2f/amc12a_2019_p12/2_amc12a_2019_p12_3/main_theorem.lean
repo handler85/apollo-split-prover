@@ -1,0 +1,44 @@
+import Mathlib
+import Aesop
+set_option maxHeartbeats 0
+open BigOperators Real Nat Topology Rat
+set_option pp.instanceTypes true
+set_option pp.numericTypes true
+set_option pp.coercions.types true
+set_option pp.letVarTypes true
+set_option pp.structureInstanceTypes true
+set_option pp.instanceTypes true
+set_option pp.mvars.withType true
+set_option pp.coercions true
+set_option pp.funBinderTypes true
+set_option pp.piBinderTypes true
+lemma amc12a_2019_p12_3
+    (x y : ℝ)
+    (h₀ : ¬x = (1 : ℝ) ∧ ¬y = (1 : ℝ))
+    (h₂ : x * y = (64 : ℝ))
+    (h₃ : (0 : ℝ) < x)
+    (h₄ : (0 : ℝ) < y)
+    (h₆₄ : ¬(2 : ℝ) = (-1 : ℝ))
+    (h₆₆ :
+    -(Real.log x * Real.log y * (2 : ℝ)) + Real.log x ^ (2 : ℕ) + Real.log y ^ (2 : ℕ) =
+        Real.log (2 : ℝ) ^ (2 : ℕ) * (20 : ℝ))
+    (h₆₂ : Real.log x + Real.log y = Real.log (2 : ℝ) * (6 : ℝ))
+    (h₆₁ : Real.log x * Real.log y = Real.log (2 : ℝ) ^ (2 : ℕ) * (4 : ℝ))
+    (h₅ : Real.log (x * y⁻¹) = Real.log x - Real.log y)
+    (h_log16 : Real.log (16 : ℝ) = Real.log (2 : ℝ) * (4 : ℝ))
+    (h₁ : Real.log x * (Real.log (2 : ℝ))⁻¹ = Real.log (2 : ℝ) * (Real.log y)⁻¹ * (4 : ℝ)) :
+    -(Real.log x * Real.log y * (Real.log (2 : ℝ))⁻¹ ^ (2 : ℕ) * (2 : ℝ)) +
+        Real.log x ^ (2 : ℕ) * (Real.log (2 : ℝ))⁻¹ ^ (2 : ℕ) +
+        Real.log y ^ (2 : ℕ) * (Real.log (2 : ℝ))⁻¹ ^ (2 : ℕ) =
+        (20 : ℝ) := by
+    have h_main : -(Real.log x * Real.log y * (Real.log (2 : ℝ))⁻¹ ^ (2 : ℕ) * (2 : ℝ)) + Real.log x ^ (2 : ℕ) * (Real.log (2 : ℝ))⁻¹ ^ (2 : ℕ) + Real.log y ^ (2 : ℕ) * (Real.log (2 : ℝ))⁻¹ ^ (2 : ℕ) = (20 : ℝ) := by
+        have h₆₇ : Real.log (2 : ℝ) > 0 := by
+            try norm_cast ; try norm_num ; try simp_all ; try ring_nf at * ; try native_decide ; try linarith ; try nlinarith
+            try norm_cast ; try norm_num ; try simp_all ; try ring_nf at * ; try native_decide ; try linarith ; try nlinarith
+            sorry
+        have h₆₈ : (Real.log (2 : ℝ))⁻¹ > 0 := by
+            positivity
+        try norm_cast ; try norm_num ; try simp_all ; try ring_nf at * ; try native_decide ; try linarith ; try nlinarith
+        try norm_cast ; try norm_num ; try simp_all ; try ring_nf at * ; try native_decide ; try linarith ; try nlinarith
+        sorry
+    gcongr
