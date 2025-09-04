@@ -1,8 +1,8 @@
 import os
 import json
 from apollo import ApolloRepair
-from gemini_answer import get_gemini_sorrified_lean_sketch
-from o3_mini_answer import get_o3mini_sorrified_lean_sketch
+from splitprover.gemini_answer import get_gemini_sorrified_lean_sketch
+from splitprover.o3_mini_answer import get_o3mini_sorrified_lean_sketch
 
 header = '''
 import Mathlib
