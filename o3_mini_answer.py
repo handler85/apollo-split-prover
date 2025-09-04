@@ -26,6 +26,8 @@ Then, based on your NL solution, write a Lean 4 proof outline for the formal sta
 - Do not define lemmas prior to defining the main theorem - the proof structure must begin with the main theorem statement, and all necessary lemmas must be defined after the := by.
 - For all steps, use 'sorry' as a placeholder - your job is to only provide the proof structure.
 - Use clear Lean 4 syntax and include all necessary lemma statements and structure.
+
+Start your Lean4 code with the tag ```lean, and end it with ```.
 """
     resp = client.responses.create(
         model="o3-mini",
@@ -33,7 +35,7 @@ Then, based on your NL solution, write a Lean 4 proof outline for the formal sta
         input=prompt,
         max_output_tokens=8192
     )
-
+    print(resp.output_text)
 
     import re
     match = re.search(r"```lean(.*?)```", resp.output_text, re.DOTALL)
